@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国家中小学智慧教育平台教材下载</title>
+    <style>
+        body {
+            background: url('https://img.xjh.me/random_img.php') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            text-align: center;
+        }
+        input {
+            width: 80%; /* 输入框占屏幕的 4/5 */
+            padding: 8px;
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+            background: transparent;
+            color: #fff;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: border-bottom 0.3s ease-in-out;
+        }
+        input:focus {
+            border-bottom: 2px solid rgba(255, 255, 255, 1);
+        }
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 16px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>国家中小学智慧教育平台教材下载</h1>
+    <label for="inputLink">输入链接：</label>
+    <input type="text" id="inputLink" placeholder="请输入链接">
+    <button id="convertButton">转换</button> <!-- 转换按钮 -->
+    <button id="visitEduPlatformButton">访问国家中小学智慧教育平台</button> <!-- 访问平台按钮 -->
+    <div class="buttons" id="actionButtons" style="display: none;">
+        <button id="visitButton">访问</button>
+        <button id="clearButton">清空</button>
+    </div>
+
+    <script>
+        document.getElementById('convertButton').addEventListener('click', () => {
+            const inputLink = document.getElementById('inputLink').value;
+            const match = inputLink.match(/https:\/\/basic\.smartedu\.cn\/tchMaterial\/detail\?contentType=assets_document&contentId=([^&]*)&catalogType=tchMaterial&subCatalog=tchMaterial/);
+
+            if (match) {
+                const extractedPart = match[1];
+                const newLink = `https://r3-ndr.ykt.cbern.com.cn/edu_product/esp/assets/${extractedPart}.pkg/pdf.pdf`;
+
+                // 显示访问和清空按钮
+                document.getElementById('actionButtons').style.display = 'flex';
+
+                // 访问按钮功能
+                document.getElementById('visitButton').onclick = () => {
+                    window.open(newLink, '_blank');
+                };
+            } else {
+                alert('输入的链接不符合要求，请检查后重试。');
+            }
+        });
+
+        // 访问国家中小学智慧教育平台按钮功能
+        document.getElementById('visitEduPlatformButton').addEventListener('click', () => {
+            const platformUrl = 'https://basic.smartedu.cn/tchMaterial?defaultTag=fa6200b8-b4aa-4d72-bebb-dddd93022a13%2Fd1914cee-dbcc-44e6-bab3-74eeed0e9875%2F0a724f60-913a-4c39-90a3-f9ce4c899e7b';
+            window.open(platformUrl, '_blank');
+        });
+
+        // 清空按钮功能
+        document.getElementById('clearButton').addEventListener('click', () => {
+            document.getElementById('inputLink').value = '';
+            document.getElementById('actionButtons').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
